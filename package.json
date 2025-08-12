@@ -1,6 +1,6 @@
 {
   "name": "mcp-windows-notify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Windows notification MCP server for AI development tools - Get desktop notifications when AI tasks complete",
   "main": "dist/index.js",
   "type": "module",
