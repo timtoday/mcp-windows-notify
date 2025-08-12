@@ -1,0 +1,63 @@
+{
+  "name": "mcp-windows-notify",
+  "version": "1.0.0",
+  "description": "Windows notification MCP server for AI development tools - Get desktop notifications when AI tasks complete",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-windows-notify": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Run npm run build && node dist/index.js to test\"",
+    "clean": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timtoday/mcp-windows-notify.git"
+  },
+  "homepage": "https://github.com/timtoday/mcp-windows-notify#readme",
+  "bugs": {
+    "url": "https://github.com/timtoday/mcp-windows-notify/issues"
+  },
+  "keywords": [
+    "mcp",
+    "windows",
+    "notification",
+    "ai",
+    "development",
+    "desktop-notifications",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "ai-assistant"
+  ],
+  "author": {
+    "name": "Tim Today",
+    "url": "https://github.com/timtoday/mcp-windows-notify"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "node-notifier": "^10.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/node-notifier": "^8.0.5",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

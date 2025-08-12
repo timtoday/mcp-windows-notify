@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "windows-notify": {
+      "command": "npx",
+      "args": ["-y", "mcp-windows-notify"],
+      "env": {
+        "NOTIFICATION_TITLE": "Claude助手通知",
+        "NOTIFICATION_SOUND": "true",
+        "NOTIFICATION_TIMEOUT": "8000",
+        "NOTIFICATION_ICON": "info"
+      }
+    }
+  }
+}

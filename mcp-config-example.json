@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "windows-notify": {
+      "command": "npx",
+      "args": ["-y", "mcp-windows-notify"],
+      "env": {
+        "NOTIFICATION_TITLE": "AI助手通知",
+        "NOTIFICATION_SOUND": "true",
+        "NOTIFICATION_TIMEOUT": "5000",
+        "NOTIFICATION_ICON": "info",
+        "MCP_SERVER_NAME": "windows-notify",
+        "MCP_SERVER_VERSION": "1.0.0"
+      }
+    }
+  }
+}
