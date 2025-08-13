@@ -123,6 +123,70 @@ export class WindowsNotifyServer {
               },
               required: ['message']
             }
+          },
+          {
+            name: 'notify_ai_work_complete',
+            description: '发送AI工作完成通知（特别醒目）',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                workType: {
+                  type: 'string',
+                  description: 'AI完成的工作类型（如：代码生成、文档编写等）'
+                },
+                details: {
+                  type: 'string',
+                  description: '工作详情（可选）'
+                }
+              },
+              required: ['workType']
+            }
+          },
+          {
+            name: 'notify_dev_tool_status',
+            description: '发送开发工具状态通知',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                status: {
+                  type: 'string',
+                  enum: ['success', 'error', 'warning'],
+                  description: '状态类型'
+                },
+                message: {
+                  type: 'string',
+                  description: '状态消息'
+                }
+              },
+              required: ['status', 'message']
+            }
+          },
+          {
+            name: 'send_urgent_notification',
+            description: '发送醒目的常驻通知（直到用户关闭）',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                message: {
+                  type: 'string',
+                  description: '通知消息内容'
+                },
+                title: {
+                  type: 'string',
+                  description: '通知标题（可选）'
+                },
+                icon: {
+                  type: 'string',
+                  enum: ['info', 'warning', 'error', 'success'],
+                  description: '通知图标类型（可选）'
+                },
+                sound: {
+                  type: 'boolean',
+                  description: '是否播放声音（可选）'
+                }
+              },
+              required: ['message']
+            }
           }
         ] as Tool[]
       };
@@ -202,6 +266,56 @@ export class WindowsNotifyServer {
               args.message as string,
               args.subtitle as string
             );
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(result, null, 2)
+                }
+              ]
+            };
+          }
+
+          case 'notify_ai_work_complete': {
+            const result = await this.notifier.notifyAIWorkComplete(
+              args.workType as string,
+              args.details as string
+            );
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(result, null, 2)
+                }
+              ]
+            };
+          }
+
+          case 'notify_dev_tool_status': {
+            const result = await this.notifier.notifyDevToolStatus(
+              args.status as string,
+              args.message as string
+            );
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(result, null, 2)
+                }
+              ]
+            };
+          }
+
+          case 'send_urgent_notification': {
+            const notificationConfig: NotificationConfig = {
+              message: args.message as string,
+              title: args.title as string,
+              icon: args.icon as any,
+              sound: args.sound as boolean,
+              timeout: 0 // 常驻通知
+            };
+
+            const result = await this.notifier.sendUrgentNotification(notificationConfig);
             return {
               content: [
                 {
